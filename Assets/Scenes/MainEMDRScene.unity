@@ -487,39 +487,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688f97c5c5b9d48819869350eeefbd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EMDRCore.EMDRBobble
---- !u!1 &1339545188 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2101309139131200152, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
-  m_PrefabInstance: {fileID: 2916813274360029836}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1339545191 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7064425790019695689, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
   m_PrefabInstance: {fileID: 2916813274360029836}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339545188}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf5ec2eba7974438825fc8ba2a6b1557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EMDR.UI.MenusUI
---- !u!114 &1339545192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339545188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1001 &2916813274360029836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -529,7 +507,15 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1151402806654041549, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151402806654041549, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151402806654041549, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1476180179889999657, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
@@ -741,6 +727,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7135259943771923232, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135259943771923232, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -795,10 +785,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2101309139131200152, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1339545192}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
 --- !u!1001 &8105564685398314351
 PrefabInstance:

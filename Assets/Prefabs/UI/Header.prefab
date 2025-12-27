@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
-  m_MinWidth: 500
+  m_MinWidth: 350
   m_MinHeight: 80
-  m_PreferredWidth: 500
+  m_PreferredWidth: 350
   m_PreferredHeight: 80
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
@@ -135,9 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
-  m_MinWidth: 500
+  m_MinWidth: 350
   m_MinHeight: -1
-  m_PreferredWidth: 500
+  m_PreferredWidth: 350
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EMDR Options
+  m_text: Options
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3441a666979c62c47a2b0c346cf396b6, type: 2}
   m_sharedMaterial: {fileID: 8044693303117576112, guid: 3441a666979c62c47a2b0c346cf396b6, type: 2}
