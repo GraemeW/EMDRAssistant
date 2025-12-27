@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9965c79cc1efa429c8fc80d7ce1f9762
+guid: 783b964665ad34dde9ed5650e10cb099
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4666846117333064125
-    second: BasicShapes - Circle_0
+      213: -8557878773938310964
+    second: Checker2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BasicShapes - Circle_0
+      name: Checker2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 402
-        height: 402
+        width: 33
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: db95c0551d7f3c040800000000000000
-      internalID: 4666846117333064125
+      spriteID: cc03d80c89e4c3980800000000000000
+      internalID: -8557878773938310964
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BasicShapes - Circle_0: 4666846117333064125
+      Checker2_0: -8557878773938310964
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
