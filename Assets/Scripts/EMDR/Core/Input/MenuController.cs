@@ -60,6 +60,12 @@ namespace EMDR.Core
             if (emdrBobble == null) { return; }
             emdrBobble.SetSize(size);
         }
+
+        public void SetBobbleType(BobbleType bobbleType)
+        {
+            if (emdrBobble == null) { return; }
+            emdrBobble.SetType(bobbleType);
+        }
         #endregion
 
         #region PrivateMethods
