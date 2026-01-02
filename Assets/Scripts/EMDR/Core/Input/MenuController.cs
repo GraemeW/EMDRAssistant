@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace EMDR.Core
@@ -14,6 +15,13 @@ namespace EMDR.Core
         private PlayerInput playerInput;
         private Camera mainCamera;
         private BobbleMover bobbleMover;
+        
+        // Events
+        public event Action<Color> backgroundColorUpdated;
+        public event Action<bool> windowFullScreenChanged;
+        public event Action<BobbleCosmeticData> bobbleCosmeticsUpdated;
+        public event Action<BobbleMotionData> bobbleMotionTunablesUpdated;
+        public event Action settingsUpdateFinished;
 
         #region StaticMethods
         private const string _menuControllerTag = "GameController";   
@@ -36,10 +44,6 @@ namespace EMDR.Core
             playerInput.Menus.Option.performed += _ => HandleUserInput(PlayerInputType.Option);
             
             mainCamera = Camera.main;
-        }
-
-        private void Start()
-        {
             bobbleMover = emdrBobble != null ? emdrBobble.GetComponent<BobbleMover>() : null;
         }
 
@@ -56,6 +60,7 @@ namespace EMDR.Core
         
         #region BobbleInterfaceMethods
         public float GetBobbleSize() => emdrBobble != null ? emdrBobble.GetSize() : 0f;
+        public BobbleShape GetBobbleShape() => emdrBobble != null ? emdrBobble.GetBobbleShape() : BobbleShape.Circle;
         public Color GetBobbleColor() => emdrBobble != null ? emdrBobble.GetColor() : Color.white;
         public Color GetBackgroundColor() => mainCamera != null ? mainCamera.backgroundColor : Color.black;
         public float GetBobbleSpeed() => bobbleMover != null ? bobbleMover.GetRelativeSpeed() : 0.2f;
@@ -65,36 +70,48 @@ namespace EMDR.Core
         {
             if (emdrBobble == null) { return; }
             emdrBobble.SetSize(size);
+            bobbleCosmeticsUpdated?.Invoke(new BobbleCosmeticData(size));
         }
 
-        public void SetBobbleType(BobbleType bobbleType)
+        public void SetBobbleShape(BobbleShape bobbleShape)
         {
             if (emdrBobble == null) { return; }
-            emdrBobble.SetType(bobbleType);
+            emdrBobble.SetShape(bobbleShape);
+            bobbleCosmeticsUpdated?.Invoke(new BobbleCosmeticData(bobbleShape));
         }
 
         public void SetBackgroundColor(Color color)
         {
             if (mainCamera == null) { return; }
             mainCamera.backgroundColor = color;
+            backgroundColorUpdated?.Invoke(color);
         }
         
         public void SetBobbleColor(Color color)
         {
             if (emdrBobble == null) { return; }
             emdrBobble.SetColor(color);
+            bobbleCosmeticsUpdated?.Invoke(new BobbleCosmeticData(color));
         }
 
         public void SetBobbleSpeed(float speed)
         {
             if (bobbleMover == null) { return;  }
             bobbleMover.SetRelativeSpeed(speed);
+            bobbleMotionTunablesUpdated?.Invoke(new BobbleMotionData(BobbleMotionDataType.Speed, speed));
         }
 
         public void SetBobbleRange(float range)
         {
             if (bobbleMover == null) { return; }
             bobbleMover.SetXRange(range);
+            bobbleMotionTunablesUpdated?.Invoke(new BobbleMotionData(BobbleMotionDataType.Range, range));
+        }
+
+        public void SetFullScreen(bool isFullScreen)
+        {
+            Screen.fullScreen = isFullScreen;
+            windowFullScreenChanged?.Invoke(isFullScreen);
         }
         #endregion
 
@@ -109,7 +126,11 @@ namespace EMDR.Core
                 case PlayerInputType.Cancel:
                 {
                     GameObject existingMenuUI = GameObject.FindGameObjectWithTag(_menuUITag);
-                    if (existingMenuUI != null) { Destroy(existingMenuUI); }
+                    if (existingMenuUI != null)
+                    {
+                        settingsUpdateFinished?.Invoke();
+                        Destroy(existingMenuUI);
+                    }
                     else { SpawnMenuUI(); }
                     break;
                 }
@@ -121,7 +142,7 @@ namespace EMDR.Core
 
         private void SpawnMenuUI()
         {
-            GameObject menuUI = Instantiate(menuUIPrefab);
+            Instantiate(menuUIPrefab);
         }
         
         private void VerifyUnique()

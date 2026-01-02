@@ -15,9 +15,11 @@ namespace EMDR.UI
         [SerializeField] private Toggle fullscreenToggle;
         [SerializeField] private Slider speedSlider;
         [SerializeField] private Slider rangeSlider;
+        [Header("Settings")] 
+        [SerializeField] private bool destroyInstanceOnStart = false;
         
         // Cached References
-        MenuController menuController;
+        private MenuController menuController;
 
         #region UnityMethods
         private void Awake()
@@ -25,8 +27,31 @@ namespace EMDR.UI
             menuController = MenuController.FindMenuController();
         }
 
+        private void OnEnable()
+        {
+            if (menuController == null) { menuController = MenuController.FindMenuController(); }
+            if (menuController == null) { return; }
+
+            menuController.backgroundColorUpdated += HandleBackgroundColorUpdated;
+            menuController.windowFullScreenChanged += HandleWindowFullScreenChanged;
+            menuController.bobbleCosmeticsUpdated += HandleBobbleCosmeticsUpdated;
+            menuController.bobbleMotionTunablesUpdated += HandleBobbleMotionTunablesUpdated;
+        }
+
+        private void OnDisable()
+        {
+            if (menuController == null) { menuController = MenuController.FindMenuController(); }
+            if (menuController == null) { return; }
+            
+            menuController.backgroundColorUpdated -= HandleBackgroundColorUpdated;
+            menuController.windowFullScreenChanged -= HandleWindowFullScreenChanged;
+            menuController.bobbleCosmeticsUpdated -= HandleBobbleCosmeticsUpdated;
+            menuController.bobbleMotionTunablesUpdated -= HandleBobbleMotionTunablesUpdated;
+        }
+
         private void Start()
         {
+            if (destroyInstanceOnStart) { Destroy(this.gameObject); }
             InitializeUI(true);
         }
 
@@ -43,39 +68,40 @@ namespace EMDR.UI
             menuController.SetBobbleSize(sliderValue);
         }
 
-        public void SetType(BobbleType bobbleType)
+        private void SetType(BobbleShape bobbleShape)
         {
             if (menuController == null) { return; }
-            menuController.SetBobbleType(bobbleType);
+            menuController.SetBobbleShape(bobbleShape);
         }
 
-        public void SetBackgroundColor(Color color)
+        private void SetBackgroundColor(Color color)
         {
             if (menuController == null) { return; }
             menuController.SetBackgroundColor(color);
         }
-        
-        public void SetBobbleColor(Color color)
+
+        private void SetBobbleColor(Color color)
         {
             if (menuController == null) { return; }
             menuController.SetBobbleColor(color);
         }
 
-        public void SetSpeed(float speed)
+        private void SetSpeed(float speed)
         {
             if (menuController == null) { return; }
             menuController.SetBobbleSpeed(speed);
         }
 
-        public void SetRange(float range)
+        private void SetRange(float range)
         {
             if (menuController == null) { return; }
             menuController.SetBobbleRange(range);
         }
 
-        public void SetFullScreen(bool isFullScreen)
+        private void SetFullScreen(bool isFullScreen)
         {
-            Screen.fullScreen = isFullScreen;
+            if (menuController == null) { return; }
+            menuController.SetFullScreen(isFullScreen);
         }
 
         public void Quit()
@@ -104,9 +130,9 @@ namespace EMDR.UI
             if (typeSelectorUI == null) return;
             if (enable)
             {
-                typeSelectorUI.Subscribe(BobbleType.Circle, () => SetType(BobbleType.Circle));
-                typeSelectorUI.Subscribe(BobbleType.Square, () => SetType(BobbleType.Square));
-                typeSelectorUI.Subscribe(BobbleType.Triangle, () => SetType(BobbleType.Triangle));
+                typeSelectorUI.Subscribe(BobbleShape.Circle, () => SetType(BobbleShape.Circle));
+                typeSelectorUI.Subscribe(BobbleShape.Square, () => SetType(BobbleShape.Square));
+                typeSelectorUI.Subscribe(BobbleShape.Triangle, () => SetType(BobbleShape.Triangle));
             }
             else { typeSelectorUI.Unsubscribe(); }
         }
@@ -127,12 +153,12 @@ namespace EMDR.UI
             {
                 if (isSetBobble)
                 {
-                    colorAdjusterUI.SetUp(menuController.GetBobbleColor());
+                    colorAdjusterUI.Set(menuController.GetBobbleColor());
                     colorAdjusterUI.Subscribe(SetBobbleColor);
                 }
                 else
                 {
-                    colorAdjusterUI.SetUp(menuController.GetBackgroundColor());
+                    colorAdjusterUI.Set(menuController.GetBackgroundColor());
                     colorAdjusterUI.Subscribe(SetBackgroundColor);
                 }
             }
@@ -165,6 +191,45 @@ namespace EMDR.UI
             rangeSlider.value = menuController.GetBobbleRange();
             if (enable) { rangeSlider.onValueChanged.AddListener(SetRange); }
             else { rangeSlider.onValueChanged.RemoveListener(SetRange); }
+        }
+        #endregion
+        
+        #region EventHandlers
+
+        private void HandleBackgroundColorUpdated(Color color)
+        {
+            backgroundColorAdjusterUI.SetWithoutNotify(color);
+        }
+
+        private void HandleWindowFullScreenChanged(bool isFullScreen)
+        {
+            fullscreenToggle.SetIsOnWithoutNotify(isFullScreen);
+        }
+        
+        private void HandleBobbleCosmeticsUpdated(BobbleCosmeticData bobbleCosmeticData)
+        {
+            switch (bobbleCosmeticData.type)
+            {
+                case BobbleCosmeticDataType.Size:
+                    sizeSlider.SetValueWithoutNotify(bobbleCosmeticData.bobbleSize);
+                    break;
+                case BobbleCosmeticDataType.Color:
+                    bobbleColorAdjusterUI.SetWithoutNotify(bobbleCosmeticData.bobbleColor);
+                    break;
+            }
+        }
+
+        private void HandleBobbleMotionTunablesUpdated(BobbleMotionData bobbleMotionData)
+        {
+            switch (bobbleMotionData.type)
+            {
+                case BobbleMotionDataType.Speed:
+                    speedSlider.SetValueWithoutNotify(bobbleMotionData.relativeSpeed);
+                    break;
+                case BobbleMotionDataType.Range:
+                    rangeSlider.SetValueWithoutNotify(bobbleMotionData.xRange);
+                    break;
+            }
         }
         #endregion
     }

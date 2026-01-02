@@ -12,17 +12,17 @@ namespace EMDR.UI
         [SerializeField] private Button squareButton;
         [SerializeField] private Button triangleButton;
 
-        public void Subscribe(BobbleType bobbleType, UnityAction action)
+        public void Subscribe(BobbleShape bobbleShape, UnityAction action)
         {
-            switch (bobbleType)
+            switch (bobbleShape)
             {
-                case BobbleType.Circle:
+                case BobbleShape.Circle:
                     if (circleButton != null) { circleButton.onClick.AddListener(action); }
                     break;
-                case BobbleType.Square:
+                case BobbleShape.Square:
                     if (squareButton != null) { squareButton.onClick.AddListener(action); }
                     break;
-                case BobbleType.Triangle:
+                case BobbleShape.Triangle:
                     if (triangleButton != null) { triangleButton.onClick.AddListener(action); }
                     break;
             }

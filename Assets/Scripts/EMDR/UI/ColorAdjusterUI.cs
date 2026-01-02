@@ -15,11 +15,18 @@ namespace EMDR.UI
         // Events
         public event Action<Color> onColorUpdated;
 
-        public void SetUp(Color color)
+        public void Set(Color color)
         {
             if (redInput != null) { redInput.text = Mathf.RoundToInt(255 * Mathf.Clamp01(color.r)).ToString(); }
             if (greenInput != null) { greenInput.text = Mathf.RoundToInt(255 * Mathf.Clamp01(color.g)).ToString(); }
             if (blueInput != null) { blueInput.text = Mathf.RoundToInt(255 * Mathf.Clamp01(color.b)).ToString(); }
+        }
+
+        public void SetWithoutNotify(Color color)
+        {
+            if (redInput != null) { redInput.SetTextWithoutNotify(Mathf.RoundToInt(255 * Mathf.Clamp01(color.r)).ToString()); }
+            if (greenInput != null) { greenInput.SetTextWithoutNotify(Mathf.RoundToInt(255 * Mathf.Clamp01(color.g)).ToString()); }
+            if (blueInput != null) { blueInput.SetTextWithoutNotify(Mathf.RoundToInt(255 * Mathf.Clamp01(color.b)).ToString()); }
         }
 
         public void Subscribe(Action<Color> colorUpdateListener)

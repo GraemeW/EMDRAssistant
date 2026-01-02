@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6104840309963531623}
   - component: {fileID: 2232849953114760628}
+  - component: {fileID: 5120436656886729612}
   m_Layer: 0
   m_Name: MenuController
   m_TagString: Untagged
@@ -46,3 +47,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EMDR.Core.MenuController
   emdrBobble: {fileID: 0}
   menuUIPrefab: {fileID: 2101309139131200152, guid: cf5c330e933e44e93b8110b60b3acb62, type: 3}
+--- !u!114 &5120436656886729612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000647179347102274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070834fcc023417b90a8ebbbd417918a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EMDR.Saving.Saver

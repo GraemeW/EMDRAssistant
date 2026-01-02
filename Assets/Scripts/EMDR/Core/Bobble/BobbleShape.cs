@@ -1,6 +1,6 @@
 namespace EMDR.Core
 {
-    public enum BobbleType
+    public enum BobbleShape
     {
         Circle,
         Square,

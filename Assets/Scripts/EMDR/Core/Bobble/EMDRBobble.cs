@@ -9,7 +9,7 @@ namespace EMDR.Core
     public class EMDRBobble : MonoBehaviour
     {
         // Tunables / State
-        [SerializeField] private BobbleType bobbleType = BobbleType.Circle;
+        [SerializeField] private BobbleShape bobbleShape = BobbleShape.Circle;
         [SerializeField] private Color bobbleColor = Color.white;
         [SerializeField] [Range(0f, 1f)] private float bobbleScale = 0.3f;
         
@@ -26,7 +26,7 @@ namespace EMDR.Core
         private void Awake()
         {
             SetCache();
-            SetType(bobbleType);
+            SetShape(bobbleShape);
             SetSize(bobbleScale);
             SetColor(bobbleColor);
         }
@@ -42,7 +42,7 @@ namespace EMDR.Core
         private void OnValidate()
         {
             SetCache();
-            SetType(bobbleType);
+            SetShape(bobbleShape);
             SetSize(bobbleScale);
             SetColor(bobbleColor);
         }
@@ -50,7 +50,7 @@ namespace EMDR.Core
         #endregion
         
         #region Getters
-        public BobbleType GetBobbleType() => bobbleType;
+        public BobbleShape GetBobbleShape() => bobbleShape;
         public float GetSize() => bobbleScale;
         public Color GetColor() => bobbleColor;
         #endregion
@@ -75,12 +75,12 @@ namespace EMDR.Core
             spriteRenderer.color = bobbleColor;
         }
 
-        public void SetType(BobbleType setBobbleType)
+        public void SetShape(BobbleShape setBobbleShape)
         {
-            bobbleType = setBobbleType;
+            bobbleShape = setBobbleShape;
             
             if (spriteRenderer == null) { return; }
-            spriteRenderer.sprite = bobbleLookup.GetBobbleSprite(setBobbleType);
+            spriteRenderer.sprite = bobbleLookup.GetBobbleSprite(setBobbleShape);
         }
         #endregion
     }

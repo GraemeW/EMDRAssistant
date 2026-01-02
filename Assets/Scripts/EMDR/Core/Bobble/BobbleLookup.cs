@@ -9,15 +9,15 @@ namespace EMDR.Core
         [SerializeField] private Sprite square;
         [SerializeField] private Sprite triangle;
 
-        public Sprite GetBobbleSprite(BobbleType bobbleType)
+        public Sprite GetBobbleSprite(BobbleShape bobbleShape)
         {
-            switch (bobbleType)
+            switch (bobbleShape)
             {
-                case BobbleType.Square:
+                case BobbleShape.Square:
                     return square;
-                case BobbleType.Triangle:
+                case BobbleShape.Triangle:
                     return triangle;
-                case BobbleType.Circle:
+                case BobbleShape.Circle:
                 default:
                     return circle;
                 
