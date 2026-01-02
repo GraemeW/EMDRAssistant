@@ -85,6 +85,8 @@ namespace EMDR.Core
         #endregion
         
         #region PrivateMethods
+        private float NextPosition(float timeOffset) => currentXFractionalPosition + direction * timeOffset * currentFractionalSpeed;
+        
         private Vector2 GetFractionalRangeBounds()
         {
             float lowerLimit = Mathf.Clamp01(0.5f - xRange/2) + spriteToScreenFraction / 2;
@@ -105,9 +107,9 @@ namespace EMDR.Core
             if (!isRampingUp) { speedRamp *= -1.0f; }
         }
         
-        private void MoveToFractionalPosition(float xFractionalPositon)
+        private void MoveToFractionalPosition(float xFractionalPosition)
         {
-            currentXFractionalPosition = xFractionalPositon;
+            currentXFractionalPosition = xFractionalPosition;
             Vector3 targetWorldPosition = mainCamera.ViewportToWorldPoint(new Vector3(currentXFractionalPosition, fixedYFractionalPosition, mainCamera.nearClipPlane));
             
             rb.MovePosition(new Vector2(targetWorldPosition.x, targetWorldPosition.y));
@@ -115,22 +117,24 @@ namespace EMDR.Core
         
         private void IncrementPosition(float deltaTime)
         {
-            ReconcileDirection();
-            
+            Vector2 fractionalRangeBounds = GetFractionalRangeBounds();
             float timeOffset = _timeOffsetFactor * deltaTime;
-            float nextFractionalDirection = currentXFractionalPosition + direction * timeOffset * currentFractionalSpeed;
-            MoveToFractionalPosition(nextFractionalDirection);
+            
+            ReconcileDirection(fractionalRangeBounds, timeOffset);
+            float xFractionalPosition = NextPosition(timeOffset);
+            
+            MoveToFractionalPosition(xFractionalPosition);
         }
 
-        private void ReconcileDirection()
+        private void ReconcileDirection(Vector2 fractionalRangeBounds, float timeOffset)
         {
-            float testPosition = currentXFractionalPosition + direction * currentFractionalSpeed;
-            Vector2 fractionalRangeBounds = GetFractionalRangeBounds();
-            if (testPosition < fractionalRangeBounds.x)
+            float testPosition = NextPosition(timeOffset);
+            
+            if (testPosition <= fractionalRangeBounds.x)
             {
                 direction = 1.0f;
             }
-            else if (testPosition > fractionalRangeBounds.y)
+            else if (testPosition >= fractionalRangeBounds.y)
             {
                 direction = -1.0f;
             }
