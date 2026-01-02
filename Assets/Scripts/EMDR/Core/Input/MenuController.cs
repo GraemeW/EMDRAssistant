@@ -11,6 +11,10 @@ namespace EMDR.Core
         [Header("Prefabs")]
         [SerializeField] private GameObject menuUIPrefab;
         
+        // Defaults for Reset
+        public static readonly Color defaultBackgroundColor = Color.black;
+        public static readonly bool defaultIsFullScreen = false;
+        
         // Cached References
         private PlayerInput playerInput;
         private Camera mainCamera;
@@ -59,32 +63,32 @@ namespace EMDR.Core
         #endregion
         
         #region BobbleInterfaceMethods
-        public float GetBobbleSize() => emdrBobble != null ? emdrBobble.GetSize() : 0f;
-        public BobbleShape GetBobbleShape() => emdrBobble != null ? emdrBobble.GetBobbleShape() : BobbleShape.Circle;
-        public Color GetBobbleColor() => emdrBobble != null ? emdrBobble.GetColor() : Color.white;
+        public BobbleShape GetBobbleShape() => emdrBobble != null ? emdrBobble.GetBobbleShape() : EMDRBobble.defaultBobbleShape;
+        public Color GetBobbleColor() => emdrBobble != null ? emdrBobble.GetColor() : EMDRBobble.defaultBobbleColor;
+        public float GetBobbleSize() => emdrBobble != null ? emdrBobble.GetSize() : EMDRBobble.defaultBobbleScale;
         public Color GetBackgroundColor() => mainCamera != null ? mainCamera.backgroundColor : Color.black;
         public float GetBobbleSpeed() => bobbleMover != null ? bobbleMover.GetRelativeSpeed() : 0.2f;
         public float GetBobbleRange() => bobbleMover != null ? bobbleMover.GetRange() : 1.0f;
         
-        public void SetBobbleSize(float size)
-        {
-            if (emdrBobble == null) { return; }
-            emdrBobble.SetSize(size);
-            bobbleCosmeticsUpdated?.Invoke(new BobbleCosmeticData(size));
-        }
-
         public void SetBobbleShape(BobbleShape bobbleShape)
         {
             if (emdrBobble == null) { return; }
             emdrBobble.SetShape(bobbleShape);
             bobbleCosmeticsUpdated?.Invoke(new BobbleCosmeticData(bobbleShape));
         }
-
+        
         public void SetBackgroundColor(Color color)
         {
             if (mainCamera == null) { return; }
             mainCamera.backgroundColor = color;
             backgroundColorUpdated?.Invoke(color);
+        }
+        
+        public void SetBobbleSize(float size)
+        {
+            if (emdrBobble == null) { return; }
+            emdrBobble.SetSize(size);
+            bobbleCosmeticsUpdated?.Invoke(new BobbleCosmeticData(size));
         }
         
         public void SetBobbleColor(Color color)
@@ -112,6 +116,17 @@ namespace EMDR.Core
         {
             Screen.fullScreen = isFullScreen;
             windowFullScreenChanged?.Invoke(isFullScreen);
+        }
+
+        public void ResetToDefaults()
+        {
+            SetBobbleShape(EMDRBobble.defaultBobbleShape);
+            SetBobbleColor(EMDRBobble.defaultBobbleColor);
+            SetBobbleSize(EMDRBobble.defaultBobbleScale);
+            SetBackgroundColor(defaultBackgroundColor);
+            SetFullScreen(defaultIsFullScreen);
+            SetBobbleSpeed(BobbleMover.defaultRelativeSpeedSetPoint);
+            SetBobbleRange(BobbleMover.defaultXRange);
         }
         #endregion
 

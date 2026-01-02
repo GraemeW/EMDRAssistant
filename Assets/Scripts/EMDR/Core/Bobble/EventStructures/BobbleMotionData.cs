@@ -9,8 +9,8 @@ namespace EMDR.Core
         public BobbleMotionData(BobbleMotionDataType type, float input)
         {
             this.type = type;
-            relativeSpeed = 0.0f;
-            xRange = 1.0f;
+            relativeSpeed = BobbleMover.defaultRelativeSpeedSetPoint;
+            xRange = BobbleMover.defaultXRange;
             
             switch (type)
             {

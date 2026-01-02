@@ -104,6 +104,12 @@ namespace EMDR.UI
             menuController.SetFullScreen(isFullScreen);
         }
 
+        public void ResetToDefaults()
+        {
+            if (menuController == null) { return; }
+            menuController.ResetToDefaults();
+        }
+
         public void Quit()
         {
             Application.Quit();

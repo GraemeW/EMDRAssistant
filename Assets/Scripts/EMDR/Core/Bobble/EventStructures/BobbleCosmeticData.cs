@@ -15,8 +15,8 @@ namespace EMDR.Core
             this.bobbleShape = bobbleShape;
             
             // Dummies
-            bobbleSize = 1.0f;
-            bobbleColor = Color.white;
+            bobbleSize = EMDRBobble.defaultBobbleScale;
+            bobbleColor = EMDRBobble.defaultBobbleColor;
         }
 
         public BobbleCosmeticData(float bobbleSize)
@@ -25,8 +25,8 @@ namespace EMDR.Core
             this.bobbleSize = bobbleSize;
             
             // Dummies
-            bobbleShape = BobbleShape.Circle;
-            bobbleColor = Color.white;
+            bobbleShape = EMDRBobble.defaultBobbleShape;
+            bobbleColor = EMDRBobble.defaultBobbleColor;
         }
 
         public BobbleCosmeticData(Color bobbleColor)
@@ -35,8 +35,8 @@ namespace EMDR.Core
             this.bobbleColor = bobbleColor;
             
             // Dummies
-            bobbleShape = BobbleShape.Circle;
-            bobbleSize = 1.0f;
+            bobbleShape = EMDRBobble.defaultBobbleShape;
+            bobbleSize = EMDRBobble.defaultBobbleScale;
         }
     }
 }

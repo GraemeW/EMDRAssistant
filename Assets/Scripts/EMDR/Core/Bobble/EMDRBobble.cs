@@ -13,6 +13,11 @@ namespace EMDR.Core
         [SerializeField] private Color bobbleColor = Color.white;
         [SerializeField] [Range(0f, 1f)] private float bobbleScale = 0.3f;
         
+        // Defaults for Reset
+        public static readonly BobbleShape defaultBobbleShape = BobbleShape.Circle;
+        public static readonly Color defaultBobbleColor = Color.white;
+        public static readonly float defaultBobbleScale = 0.3f;
+        
         // Constants
         private const float _minScale = 0.05f;
         private const float _maxScale = 1.5f;

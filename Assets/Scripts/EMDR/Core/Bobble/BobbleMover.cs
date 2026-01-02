@@ -6,8 +6,12 @@ namespace EMDR.Core
     {
         [SerializeField] [Range(0f, 1f)] private float fixedYFractionalPosition = 0.5f;
         [SerializeField] [Range(0f, 1f)] private float initialXFractionalPosition = 0.65f;
-        [SerializeField] [Range(0f, 1f)] private float relativeSpeedSetPoint = 0.2f;
+        [SerializeField] [Range(0f, 1f)] private float relativeSpeedSetPoint = 0.35f;
         [SerializeField] [Range(0f, 1f)] private float xRange = 1.0f;
+        
+        // Defaults for Reset
+        public static readonly float defaultRelativeSpeedSetPoint = 0.35f;
+        public static readonly float defaultXRange = 1.0f;
         
         // Constants
         private const float _minFractionalSpeed = 0.005f;
