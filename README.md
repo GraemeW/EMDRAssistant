@@ -1,6 +1,6 @@
 # EMDRAssistant
 
-EMDR Assistant is a Unity project that creates a simple moving bobble for EMDR therapy. 
+EMDR Assistant is a Unity project that creates a simple moving bobble for [EMDR therapy](https://en.wikipedia.org/wiki/Eye_movement_desensitization_and_reprocessing). 
 
 Example usage as below
 
@@ -42,6 +42,3 @@ Motion configurables include:
 ### Save System
 
 Settings are saved via PlayerPrefs when the Options window is closed or the application is exited.
-  
-
-
