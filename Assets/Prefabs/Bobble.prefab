@@ -65,8 +65,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EMDR.Core.BobbleMover
   fixedYFractionalPosition: 0.5
   initialXFractionalPosition: 0.65
-  xRange: 1
   relativeSpeed: 0.2
+  xRange: 1
 --- !u!114 &3752056671714232907
 MonoBehaviour:
   m_ObjectHideFlags: 0

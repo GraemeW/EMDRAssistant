@@ -12,27 +12,27 @@ namespace EMDR.UI
         [SerializeField] private Button squareButton;
         [SerializeField] private Button triangleButton;
 
-        public void SetUp(BobbleType bobbleType, UnityAction action)
+        public void Subscribe(BobbleType bobbleType, UnityAction action)
         {
             switch (bobbleType)
             {
                 case BobbleType.Circle:
-                    circleButton.onClick.AddListener(action);
+                    if (circleButton != null) { circleButton.onClick.AddListener(action); }
                     break;
                 case BobbleType.Square:
-                    squareButton.onClick.AddListener(action);
+                    if (squareButton != null) { squareButton.onClick.AddListener(action); }
                     break;
                 case BobbleType.Triangle:
-                    triangleButton.onClick.AddListener(action);
+                    if (triangleButton != null) { triangleButton.onClick.AddListener(action); }
                     break;
             }
         }
 
-        public void SetDown()
+        public void Unsubscribe()
         {
-            circleButton.onClick.RemoveAllListeners();
-            squareButton.onClick.RemoveAllListeners();
-            triangleButton.onClick.RemoveAllListeners();
+            if (circleButton != null) { circleButton.onClick.RemoveAllListeners(); }
+            if (squareButton != null) { squareButton.onClick.RemoveAllListeners(); }
+            if (triangleButton != null) { triangleButton.onClick.RemoveAllListeners(); }
         }
     }
 }

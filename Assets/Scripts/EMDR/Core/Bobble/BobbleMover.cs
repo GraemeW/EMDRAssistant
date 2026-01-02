@@ -6,8 +6,8 @@ namespace EMDR.Core
     {
         [SerializeField] [Range(0f, 1f)] private float fixedYFractionalPosition = 0.5f;
         [SerializeField] [Range(0f, 1f)] private float initialXFractionalPosition = 0.65f;
-        [SerializeField] [Range(0f, 1f)] private float xRange = 1.0f;
         [SerializeField] [Range(0f, 1f)] private float relativeSpeed = 0.2f;
+        [SerializeField] [Range(0f, 1f)] private float xRange = 1.0f;
         
         // Constants
         private const float _minFractionalSpeed = 0.005f;
@@ -41,12 +41,13 @@ namespace EMDR.Core
         #endregion
         
         #region PublicMethods
-
+        public float GetSpeed() => relativeSpeed;
+        public float GetRange() => xRange;
+        
         public void SetSpriteToScreenFraction(float setSpriteToScreenFraction)
         {
             spriteToScreenFraction = setSpriteToScreenFraction;
         }
-        
         
         public void ResetPosition()
         {
@@ -56,6 +57,11 @@ namespace EMDR.Core
         public void SetSpeed(float speed)
         {
             relativeSpeed = Mathf.Clamp01(speed);
+        }
+
+        public void SetXRange(float setXRange)
+        {
+            xRange = Mathf.Clamp01(setXRange);
         }
         #endregion
         

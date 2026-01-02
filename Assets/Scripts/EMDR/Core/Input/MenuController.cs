@@ -12,6 +12,7 @@ namespace EMDR.Core
         
         // Cached References
         private PlayerInput playerInput;
+        private Camera mainCamera;
         private BobbleMover bobbleMover;
 
         #region StaticMethods
@@ -27,13 +28,14 @@ namespace EMDR.Core
         #region UnityMethods
         private void Awake()
         {
-            playerInput = new PlayerInput();
-
             VerifyUnique();
             
+            playerInput = new PlayerInput();
             playerInput.Menus.Execute.performed += _ => HandleUserInput(PlayerInputType.Execute);
             playerInput.Menus.Cancel.performed += _ => HandleUserInput(PlayerInputType.Cancel);
             playerInput.Menus.Option.performed += _ => HandleUserInput(PlayerInputType.Option);
+            
+            mainCamera = Camera.main;
         }
 
         private void Start()
@@ -54,6 +56,10 @@ namespace EMDR.Core
         
         #region BobbleInterfaceMethods
         public float GetBobbleSize() => emdrBobble != null ? emdrBobble.GetSize() : 0f;
+        public Color GetBobbleColor() => emdrBobble != null ? emdrBobble.GetColor() : Color.white;
+        public Color GetBackgroundColor() => mainCamera != null ? mainCamera.backgroundColor : Color.black;
+        public float GetBobbleSpeed() => bobbleMover != null ? bobbleMover.GetSpeed() : 0.2f;
+        public float GetBobbleRange() => bobbleMover != null ? bobbleMover.GetRange() : 1.0f;
         
         public void SetBobbleSize(float size)
         {
@@ -65,6 +71,30 @@ namespace EMDR.Core
         {
             if (emdrBobble == null) { return; }
             emdrBobble.SetType(bobbleType);
+        }
+
+        public void SetBackgroundColor(Color color)
+        {
+            if (mainCamera == null) { return; }
+            mainCamera.backgroundColor = color;
+        }
+        
+        public void SetBobbleColor(Color color)
+        {
+            if (emdrBobble == null) { return; }
+            emdrBobble.SetColor(color);
+        }
+
+        public void SetBobbleSpeed(float speed)
+        {
+            if (bobbleMover == null) { return;  }
+            bobbleMover.SetSpeed(speed);
+        }
+
+        public void SetBobbleRange(float range)
+        {
+            if (bobbleMover == null) { return; }
+            bobbleMover.SetXRange(range);
         }
         #endregion
 
