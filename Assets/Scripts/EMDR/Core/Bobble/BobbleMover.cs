@@ -11,7 +11,7 @@ namespace EMDR.Core
         
         // Constants
         private const float _minFractionalSpeed = 0.005f;
-        private const float _maxFractionalSpeed = 0.1f;
+        private const float _maxFractionalSpeed = 0.05f;
         private const float _timeOffsetFactor = 50.0f;
         private const float _speedRampTime = 1.5f;
         

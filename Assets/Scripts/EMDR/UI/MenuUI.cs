@@ -12,6 +12,7 @@ namespace EMDR.UI
         [SerializeField] private TypeSelectorUI typeSelectorUI;
         [SerializeField] private ColorAdjusterUI backgroundColorAdjusterUI;
         [SerializeField] private ColorAdjusterUI bobbleColorAdjusterUI;
+        [SerializeField] private Toggle fullscreenToggle;
         [SerializeField] private Slider speedSlider;
         [SerializeField] private Slider rangeSlider;
         
@@ -71,6 +72,17 @@ namespace EMDR.UI
             if (menuController == null) { return; }
             menuController.SetBobbleRange(range);
         }
+
+        public void SetFullScreen(bool isFullScreen)
+        {
+            Screen.fullScreen = isFullScreen;
+        }
+
+        public void Quit()
+        {
+            Application.Quit();
+        }
+
         #endregion
         
         #region Initialization
@@ -82,6 +94,7 @@ namespace EMDR.UI
             InitializeSizeAdjuster(enable);
             InitializeColorAdjuster(enable, true, bobbleColorAdjusterUI);
             InitializeColorAdjuster(enable, false, backgroundColorAdjusterUI);
+            InitializeFullScreenAdjuster();
             InitializeSpeedAdjuster(enable);
             InitializeRangeAdjuster(enable);
         }
@@ -128,6 +141,14 @@ namespace EMDR.UI
                 if (isSetBobble) { colorAdjusterUI.Unsubscribe(SetBobbleColor); }
                 else { colorAdjusterUI.Unsubscribe(SetBackgroundColor); }
             }
+        }
+
+        private void InitializeFullScreenAdjuster()
+        {
+            if (fullscreenToggle == null) { return; }
+            
+            fullscreenToggle.isOn = Screen.fullScreen;
+            fullscreenToggle.onValueChanged.AddListener(SetFullScreen);
         }
         
         private void InitializeSpeedAdjuster(bool enable)
