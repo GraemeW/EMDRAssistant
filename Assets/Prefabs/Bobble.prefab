@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688f97c5c5b9d48819869350eeefbd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EMDRCore.EMDRBobble
-  bobbleType: 0
+  bobbleShape: 0
   bobbleColor: {r: 1, g: 1, b: 1, a: 1}
   bobbleScale: 0.3
 --- !u!114 &7120423455609203831

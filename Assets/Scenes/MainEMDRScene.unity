@@ -498,23 +498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5ec2eba7974438825fc8ba2a6b1557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EMDR.UI.MenusUI
---- !u!1 &2053201632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7000647179347102274, guid: b9196f12f1a844d6ea23ccf3d49c52c3, type: 3}
-  m_PrefabInstance: {fileID: 8105564685398314351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2053201635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053201632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 070834fcc023417b90a8ebbbd417918a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EMDR.Saving.Saver
 --- !u!1001 &2916813274360029836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2491,10 +2474,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7000647179347102274, guid: b9196f12f1a844d6ea23ccf3d49c52c3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2053201635}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9196f12f1a844d6ea23ccf3d49c52c3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
