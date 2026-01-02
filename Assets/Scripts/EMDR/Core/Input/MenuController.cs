@@ -58,7 +58,7 @@ namespace EMDR.Core
         public float GetBobbleSize() => emdrBobble != null ? emdrBobble.GetSize() : 0f;
         public Color GetBobbleColor() => emdrBobble != null ? emdrBobble.GetColor() : Color.white;
         public Color GetBackgroundColor() => mainCamera != null ? mainCamera.backgroundColor : Color.black;
-        public float GetBobbleSpeed() => bobbleMover != null ? bobbleMover.GetSpeed() : 0.2f;
+        public float GetBobbleSpeed() => bobbleMover != null ? bobbleMover.GetRelativeSpeed() : 0.2f;
         public float GetBobbleRange() => bobbleMover != null ? bobbleMover.GetRange() : 1.0f;
         
         public void SetBobbleSize(float size)
@@ -88,7 +88,7 @@ namespace EMDR.Core
         public void SetBobbleSpeed(float speed)
         {
             if (bobbleMover == null) { return;  }
-            bobbleMover.SetSpeed(speed);
+            bobbleMover.SetRelativeSpeed(speed);
         }
 
         public void SetBobbleRange(float range)
@@ -104,6 +104,7 @@ namespace EMDR.Core
             switch (playerInputType)
             {
                 case PlayerInputType.Execute:
+                    bobbleMover.ToggleMovement();
                     break;
                 case PlayerInputType.Cancel:
                 {
@@ -113,7 +114,6 @@ namespace EMDR.Core
                     break;
                 }
                 case PlayerInputType.Option:
-                    break;
                 default:
                     break;
             }
